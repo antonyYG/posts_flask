@@ -1,0 +1,23 @@
+<h2>Registrar Usuario</h2>
+<form method="post">
+  <input type="text" name="name" placeholder="Nombre" required><br>
+  <input type="email" name="email" placeholder="Correo" required><br>
+  <input type="password" name="password" placeholder="Contraseña" required><br>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <button type="submit">Registrar</button>
+</form>
+<p>¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a></p>
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <script>
+      {% for category, message in messages %}
+        Swal.fire({
+          title: "{{ 'Éxito' if category == 'success' else 'Error' }}",
+          text: "{{ message }}",
+          icon: "{{ category }}",
+          confirmButtonText: "Aceptar"
+        });
+      {% endfor %}
+    </script>
+  {% endif %}
+{% endwith %}
